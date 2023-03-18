@@ -5,8 +5,16 @@ on: [push]
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - uses: psf/black@stable
         with:
           options: "--verbose"
+      
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Format Python code with Black"
+          commit_options: "--no-verify"
+          ref: ${{ github.head_ref }}
