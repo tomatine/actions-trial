@@ -9,6 +9,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
       - uses: psf/black@stable
         with:
           options: "--verbose"
@@ -17,4 +19,3 @@ jobs:
         with:
           commit_message: "Format Python code with Black"
           commit_options: "--no-verify"
-          ref: ${{ github.head_ref }}
